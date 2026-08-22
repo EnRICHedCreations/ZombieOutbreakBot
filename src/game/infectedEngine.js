@@ -1,0 +1,6 @@
+const {INFECTED,DIFFICULTIES}=require('../data/content');const runEngine=require('./runEngine');
+function spawn(r,count=1){const diff=DIFFICULTIES[r.difficulty]||DIFFICULTIES.OUTBREAK,night=runEngine.isNight(r),keys=Object.keys(INFECTED);const ops=[];for(let i=0;i<count;i++){let pool=keys.filter(k=>k!=='BRUTE');if(!night)pool=pool.filter(k=>k!=='STALKER');const id=pool[Math.floor(Math.random()*pool.length)],b={...INFECTED[id]};b.id=`z${i+1}`;b.type=id;b.maxHp=b.hp=Math.round(b.hp*diff.enemy*(night?1.15:1));b.damage=b.damage.map(x=>Math.round(x*diff.enemy*(night?1.15:1)));ops.push(b)}return{name:count>=8?'Horde':'Infected Pack',operators:ops}}
+function living(e){return e?.operators?.filter(z=>z.hp>0)||[]}function target(e,id){const l=living(e);return l.find(z=>z.id===id)||l[0]}
+function damage(z,d){const dealt=Math.min(z.hp,Math.max(0,Math.round(d)));z.hp-=dealt;return{dealt,killed:z.hp<=0}}
+function incoming(z){const[lo,hi]=z.damage;return Math.floor(Math.random()*(hi-lo+1))+lo}function infection(z){const[lo,hi]=z.infection;return Math.floor(Math.random()*(hi-lo+1))+lo}
+module.exports={spawn,living,target,damage,incoming,infection};

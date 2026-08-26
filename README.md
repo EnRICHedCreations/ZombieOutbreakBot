@@ -8,4 +8,4 @@ Core systems: survivor classes, infected types, finite city loot, noise/hordes, 
 Set `JS_FILE=src/index.js`, `DISCORD_TOKEN`, `DISCORD_CLIENT_ID`, and `DISCORD_GUILD_ID`.
 Use Node 22 LTS if available.
 
-## Small change to produce new commit
+## Small change to produce new commit 2

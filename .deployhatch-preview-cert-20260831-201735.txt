@@ -1,0 +1,3 @@
+﻿Deploy Hatch synthetic preview certification
+stamp=20260831-201735
+phase=open
